@@ -134,3 +134,58 @@ Started neo4j (pid 1234). It is avai1ab1e at http://1ocalhost:7474/
 输入之后需要自己改密码
 
 <img src="image\mima.png" alt="image-20250703234630659" style="zoom:67%;" />
+
+
+
+
+
+## 数据导入neo4j数据库
+
+批处理导入数据到neo4j
+
+在Neo4j中，将数据批量导入到数据库中通常涉及到以下几个步骤：
+
+### 1. 准备数据
+
+首先，确保你的数据是适合导入到Neo4j的格式。常见的数据格式包括CSV、JSON或自定义格式。
+
+### 2. 使用`neo4j-admin import`工具
+
+Neo4j提供了一个非常强大的命令行工具`neo4j-admin import`，它专门用于高效地批量导入数据。这个工具可以处理大规模数据导入，并且比使用Cypher查询更快。
+
+**停止Neo4j服务**：在导入数据之前，你需要停止Neo4j服务以避免冲突
+
+```
+@echo off
+
+REM Neo4j Admin导入命令
+REM 适用于Neo4j 2025.02.0及更高版本
+REM 生成时间: 2025-03-21 17:08:23
+
+neo4j-admin database import full neo4j --overwrite-destination ^
+  --nodes=Product="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\product_nodes.csv" ^
+  --nodes=Category="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\category_nodes.csv" ^
+  --nodes=Supplier="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\supplier_nodes.csv" ^
+  --nodes=Customer="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\customer_nodes.csv" ^
+  --nodes=Employee="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\employee_nodes.csv" ^
+  --nodes=Shipper="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\shipper_nodes.csv" ^
+  --nodes=Order="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\order_nodes.csv" ^
+  --nodes=Review="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\review_nodes.csv" ^
+  --relationships=BELONGS_TO="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\product_category_edges.csv" ^
+  --relationships=SUPPLIED_BY="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\product_supplier_edges.csv" ^
+  --relationships=PLACED="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\customer_order_edges.csv" ^
+  --relationships=PROCESSED="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\employee_order_edges.csv" ^
+  --relationships=SHIPPED_VIA="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\order_shipper_edges.csv" ^
+  --relationships=CONTAINS="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\order_product_edges.csv" ^
+  --relationships=REPORTS_TO="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\employee_reports_to_edges.csv" ^
+  --relationships=WROTE="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\customer_review_edges.csv" ^
+  --relationships=ABOUT="E:\LLMlearn\lgAgent\origin_data\data\neo4j_admin\review_product_edges.csv" ^
+  --delimiter="," ^
+  --array-delimiter=";" ^
+  --skip-bad-relationships=true ^
+  --skip-duplicate-nodes=true
+```
+
+**启动服务器**：neo4j.bat console
+
+<img src="image\res.png" alt="image-20250704000915141" style="zoom:50%;" />
