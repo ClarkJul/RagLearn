@@ -217,7 +217,26 @@ graphrag prompt-tune --help
 python -m graphrag prompt-tune --config ./settings.yaml --root ./ --no-discover-entity-types --language Chinese --output ./prompts       
 ```
 
-​     
+相关提示词修改
+
+  ![image-20250703164256945](D:\git\RagLearn\image\prompt1.png)   
+
+
+
+![image-20250703164715064](image\prompt2.png)
+
+```
+# Language Instruction
+Generate the entire report in chinese.
+```
+
+![image-20250703165036256](image\prompt3.png)
+
+```
+Please provide the comprehensive summary in chinese.
+```
+
+
 
 #### 构建索引
 
